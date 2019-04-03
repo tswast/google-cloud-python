@@ -35,6 +35,15 @@ def random_table_id(client, dataset_id):
 
 
 @pytest.fixture
+def random_dataset_id(client):
+    now = datetime.datetime.now()
+    random_dataset_id = "example_dataset_{}_{}".format(
+        now.strftime("%Y%m%d%H%M%S"), uuid.uuid4().hex[:8]
+    )
+    return "{}.{}".format(client.project, random_dataset_id)
+
+
+@pytest.fixture
 def dataset_id(client):
     now = datetime.datetime.now()
     dataset_id = "python_samples_{}_{}".format(
